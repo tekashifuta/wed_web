@@ -8,15 +8,15 @@
 // -----------------------------------------------------------------------
 
 /// The bride & groom's first names, shown big in the hero section.
-const brideName = 'Rose Mae';
+const brideName = 'Rose';
 const groomName = 'Daryl';
 
-/// Shown as "Amara & Julian" or reversed depending on your preference.
+/// Shown as "Rose & Daryl" or reversed depending on your preference.
 String get coupleNames => '$brideName & $groomName';
 
 /// Wedding date info.
 const weddingWeekday = 'Saturday';
-const weddingDateLabel = 'the 12th of September, 2026';
+const weddingDateLabel = 'the 12th of September, 2026 - TBA';
 const weddingShortDate = '09 · 12 · 2026';
 
 /// Hero subtitle / tagline.
@@ -44,7 +44,7 @@ const storyMoments = [
   (
     year: '2024',
     title: 'The Proposal',
-    description: 'On a quiet evening among the roses, Julian got down on one knee and Amara said yes without hesitation.',
+    description: 'On a quiet evening among the roses, Daryl got down on one knee and Rose said yes without hesitation.',
   ),
   (
     year: '2026',
@@ -86,5 +86,5 @@ const galleryImages = [
 const rsvpDeadline = 'August 15th, 2026';
 
 /// Contact info shown in the footer.
-const contactEmail = 'hello@rosemaedaryl-wedding.com';
-const weddingHashtag = '#RoseMaeAndDaryl2026';
+const contactEmail = 'hello@rosedaryl-wedding.com';
+const weddingHashtag = '#RoseAndDaryl2026';
