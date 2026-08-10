@@ -6,8 +6,6 @@
 
 import 'package:jaspr/client.dart';
 
-import 'package:wed_web/pages/about.dart' deferred as _about;
-import 'package:wed_web/pages/home.dart' deferred as _home;
 import 'package:wed_web/pages/invitation.dart' deferred as _invitation;
 
 /// Default [ClientOptions] for use with your Jaspr project.
@@ -28,8 +26,6 @@ import 'package:wed_web/pages/invitation.dart' deferred as _invitation;
 /// ```
 ClientOptions get defaultClientOptions => ClientOptions(
   clients: {
-    'about': ClientLoader((p) => _about.About(), loader: _about.loadLibrary),
-    'home': ClientLoader((p) => _home.Home(), loader: _home.loadLibrary),
     'invitation': ClientLoader(
       (p) => _invitation.Invitation(),
       loader: _invitation.loadLibrary,

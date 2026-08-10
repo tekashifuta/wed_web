@@ -8,8 +8,8 @@
 // -----------------------------------------------------------------------
 
 /// The bride & groom's first names, shown big in the hero section.
-const brideName = 'Amara';
-const groomName = 'Julian';
+const brideName = 'Rose Mae';
+const groomName = 'Daryl';
 
 /// Shown as "Amara & Julian" or reversed depending on your preference.
 String get coupleNames => '$brideName & $groomName';
@@ -86,5 +86,5 @@ const galleryImages = [
 const rsvpDeadline = 'August 15th, 2026';
 
 /// Contact info shown in the footer.
-const contactEmail = 'hello@amarajulian-wedding.com';
-const weddingHashtag = '#AmaraAndJulian2026';
+const contactEmail = 'hello@rosemaedaryl-wedding.com';
+const weddingHashtag = '#RoseMaeAndDaryl2026';

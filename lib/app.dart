@@ -2,9 +2,6 @@ import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
 
-import 'components/header.dart';
-import 'pages/about.dart';
-import 'pages/home.dart';
 import 'pages/invitation.dart';
 
 // The main component of your application.
@@ -17,15 +14,14 @@ class App extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     // This method is rerun every time the component is rebuilt.
-    
+
     // Renders a <div class="main"> html element with children.
     return div(classes: 'main', [
-      const Header(),
-      Router(routes: [
-        Route(path: '/', title: 'Home', builder: (context, state) => const Home()),
-        Route(path: '/about', title: 'About', builder: (context, state) => const About()),
-        Route(path: '/invitation', title: 'Our Wedding Invitation', builder: (context, state) => const Invitation()),
-      ]),
+      Router(
+        routes: [
+          Route(path: '/', title: 'Our Wedding Invitation', builder: (context, state) => const Invitation()),
+        ],
+      ),
     ]);
   }
 
@@ -39,9 +35,8 @@ class App extends StatelessComponent {
       // The '&' refers to the parent selector of a nested style rules.
       css('&').styles(
         display: .flex,
-        height: 100.vh,
+        minHeight: 100.vh,
         flexDirection: .column,
-        flexWrap: .wrap,
       ),
       css('section').styles(
         display: .flex,
@@ -49,12 +44,6 @@ class App extends StatelessComponent {
         justifyContent: .center,
         alignItems: .center,
         flex: Flex(grow: 1),
-      ),
-      // The invitation page is a long, freely scrolling page, so it opts out of the
-      // fixed-height/flex-wrap layout used by the default Home/About starter pages.
-      css('&:has(.invitation-page)').styles(
-        height: Unit.auto,
-        flexWrap: .nowrap,
       ),
     ]),
   ];

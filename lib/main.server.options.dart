@@ -21,11 +21,7 @@ import 'package:wed_web/components/invitation/schedule_section.dart'
     as _schedule_section;
 import 'package:wed_web/components/invitation/story_section.dart'
     as _story_section;
-import 'package:wed_web/components/counter.dart' as _counter;
-import 'package:wed_web/components/header.dart' as _header;
 import 'package:wed_web/constants/theme.dart' as _theme;
-import 'package:wed_web/pages/about.dart' as _about;
-import 'package:wed_web/pages/home.dart' as _home;
 import 'package:wed_web/pages/invitation.dart' as _invitation;
 import 'package:wed_web/app.dart' as _app;
 
@@ -48,15 +44,11 @@ import 'package:wed_web/app.dart' as _app;
 ServerOptions get defaultServerOptions => ServerOptions(
   clientId: 'main.client.dart.js',
   clients: {
-    _about.About: ClientTarget<_about.About>('about'),
-    _home.Home: ClientTarget<_home.Home>('home'),
     _invitation.Invitation: ClientTarget<_invitation.Invitation>('invitation'),
   },
   styles: () => [
     ..._theme.styles,
     ..._app.App.styles,
-    ..._counter.CounterState.styles,
-    ..._header.Header.styles,
     ..._details_section.DetailsSection.styles,
     ..._footer_section.FooterSection.styles,
     ..._gallery_section.GallerySection.styles,
@@ -65,7 +57,6 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._rsvp_section.RsvpSection.styles,
     ..._schedule_section.ScheduleSection.styles,
     ..._story_section.StorySection.styles,
-    ..._about.About.styles,
     ..._invitation.Invitation.styles,
   ],
 );
