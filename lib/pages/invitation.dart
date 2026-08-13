@@ -6,7 +6,7 @@ import '../components/invitation/details_section.dart';
 import '../components/invitation/footer_section.dart';
 import '../components/invitation/gallery_section.dart';
 import '../components/invitation/hero_section.dart';
-import '../components/invitation/intro_section.dart';
+import '../components/invitation/nav_bar.dart';
 import '../components/invitation/rsvp_section.dart';
 import '../components/invitation/schedule_section.dart';
 import '../components/invitation/story_section.dart';
@@ -29,8 +29,8 @@ class Invitation extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return div(classes: 'invitation-page', [
+      const NavBar(),
       const HeroSection(),
-      const IntroSection(),
       const StorySection(),
       const DetailsSection(),
       const ScheduleSection(),

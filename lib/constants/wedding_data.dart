@@ -14,54 +14,45 @@ const groomName = 'Daryl';
 /// Shown as "Rose & Daryl" or reversed depending on your preference.
 String get coupleNames => '$brideName & $groomName';
 
+/// Short monogram used in the navigation bar and footer.
+const monogram = 'R & D';
+
 /// Wedding date info.
 const weddingWeekday = 'Saturday';
-const weddingDateLabel = 'the 12th of September, 2026 - TBA';
-const weddingShortDate = '09 · 12 · 2026';
+const weddingDateFull = 'December 20, 2026';
 
-/// Hero subtitle / tagline.
-const heroTagline = 'Together with our families, we joyfully invite you to celebrate our garden wedding';
+/// The small uppercase kicker shown above the couple's names (matches the
+/// Stitch "Wedding Home" hero).
+const heroKicker = 'The Wedding Of';
 
-/// Hero background image — replace with your own photo.
-const heroImageUrl = 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1600&q=80';
+/// Hero background image — the wedding gazebo (from the Stitch design).
+const heroImageUrl =
+    'https://lh3.googleusercontent.com/aida/AP1WRLvfF4f7QxvNb5R7stIgIYBM-B2KsWXmPU08nc-cRy6lEFz9kzuYPLeBRmRk_cNJoQrGy0imQit7O9JmGJBKo1hbg5puw3Ubsu3Y0b52JV1Bb7jZwigjW_LZfhoOl8ZA_gHP5ctSEKBJ7j_YDTdsPX7DdFw1CDbpvwMvCmM5JUxneKEohsXEiia0x8Fh2dnsu2InCcbip2in8DCP-FBZLfYuxtn30q2kXRkyb9y11Um99QZkak3tyS41u3Ah';
 
-/// A short love-story blurb shown under the hero.
-const introQuote =
-    '“In a garden full of flowers, we found each other — and decided to grow a life together, side by side, forever.”';
+/// Venue details shown in the hero and reused by the ceremony/reception cards.
+const venueName = 'Velvet & Stone Hotel';
+const venueAddress1 = '45 Park Lane, Historic District';
+const venueAddress2 = 'Savannah, GA';
 
-/// Our Story timeline entries: (year, title, description).
-const storyMoments = [
-  (
-    year: '2019',
-    title: 'How We Met',
-    description: 'A chance meeting at a mutual friend\'s garden party turned into hours of conversation under string lights.',
-  ),
-  (
-    year: '2021',
-    title: 'The First Trip',
-    description: 'Our first trip together to the countryside confirmed what we already knew — this was something special.',
-  ),
-  (
-    year: '2024',
-    title: 'The Proposal',
-    description: 'On a quiet evening among the roses, Daryl got down on one knee and Rose said yes without hesitation.',
-  ),
-  (
-    year: '2026',
-    title: 'Happily Ever After',
-    description: 'Now we can\'t wait to celebrate the next chapter of our story, surrounded by the people we love most.',
-  ),
+/// "Our Story" paragraphs (from the Stitch design).
+const storyParagraphs = [
+  'It began with a chance meeting in a small coffee shop in the historic district. What started as a shared table quickly blossomed into shared dreams, long walks under the Spanish moss, and a quiet understanding that we had found something rare.',
+  'Over the years, our love has grown through countless adventures, quiet Sunday mornings, and the unwavering support we find in each other. We are so excited to gather our closest family and friends to celebrate the beginning of our next chapter.',
 ];
 
-/// Ceremony details.
-const ceremonyTime = '4:00 PM';
-const ceremonyVenue = 'The Rose Garden Pavilion';
-const ceremonyAddress = '123 Blossom Lane, Green Valley';
+/// "Our Story" photograph — the couple (from the Stitch design).
+const storyImageUrl =
+    'https://lh3.googleusercontent.com/aida/AP1WRLvBnzYDMj0-Dxzdv5r6HAYG7Q6yOmOWgIgyx2hXjf44aDe2Qeeaxo3DFNh23YY_ZqbLmBxcR7Z1eCf2-uzXACF_BlX3Wkl7NK8f01JiEHBQQbx2TH7B4vAwNB4JKILRLCzUKhvGkllsv9Z9ZA869_Zg1RCVOXGGlrSgpmDCHUbz0M453YW-dM6-p47LlrGbsVrwo6DaKcdh8WfHzDdDwcZ6vZ2Sd786SiQnTQ4HlkLWW4-_fdPtcIbK3jZq';
 
-/// Reception details.
+/// Ceremony details (same venue as the hero).
+const ceremonyTime = '4:00 PM';
+const ceremonyVenue = venueName;
+const ceremonyAddress = '$venueAddress1, $venueAddress2';
+
+/// Reception details (same venue as the hero).
 const receptionTime = '6:30 PM';
-const receptionVenue = 'The Orchard Hall';
-const receptionAddress = '123 Blossom Lane, Green Valley';
+const receptionVenue = venueName;
+const receptionAddress = '$venueAddress1, $venueAddress2';
 
 /// Day-of schedule entries: (time, title, description).
 const scheduleItems = [
@@ -83,7 +74,7 @@ const galleryImages = [
 ];
 
 /// RSVP deadline shown to guests.
-const rsvpDeadline = 'August 15th, 2026';
+const rsvpDeadline = 'November 1st, 2026';
 
 /// Contact info shown in the footer.
 const contactEmail = 'hello@rosedaryl-wedding.com';

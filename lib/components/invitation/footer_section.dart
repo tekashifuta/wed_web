@@ -11,12 +11,16 @@ class FooterSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return footer(classes: 'invite-footer', [
-      p(classes: 'footer-names', [.text(coupleNames)]),
-      p(classes: 'footer-hashtag', [.text(weddingHashtag)]),
-      p(classes: 'footer-contact', [
-        .text('Questions? Reach us at '),
-        a(href: 'mailto:$contactEmail', [.text(contactEmail)]),
+      div(classes: 'footer-brand', [
+        span([.text('R ')]),
+        span(classes: 'footer-amp', [.text('&')]),
+        span([.text(' D')]),
       ]),
+      div(classes: 'footer-links', [
+        a(href: '#', [.text('Contact Us')]),
+        a(href: '#', [.text('Privacy Policy')]),
+      ]),
+      p(classes: 'footer-copy', [.text('© 2026 $coupleNames. Handcrafted with love.')]),
     ]);
   }
 
@@ -27,28 +31,43 @@ class FooterSection extends StatelessComponent {
         display: .flex,
         flexDirection: .column,
         alignItems: .center,
-        gap: Gap.all(0.5.rem),
+        width: 100.percent,
         padding: .symmetric(vertical: 4.5.rem, horizontal: 1.5.rem),
-        backgroundColor: inverseSurface,
+        backgroundColor: surfaceContainerLow,
+        border: .only(top: BorderSide.solid(color: Color('rgba(195, 200, 191, 0.3)'), width: 1.px)),
         textAlign: .center,
       ),
-      css('.footer-names').styles(
-        margin: .zero,
+      css('.footer-brand').styles(
+        margin: .only(bottom: 1.5.rem),
         fontFamily: headingFont,
-        fontSize: 1.9.rem,
-        color: inverseOnSurface,
+        fontSize: 1.5.rem,
+        letterSpacing: Unit.pixels(-1),
+        color: primaryColor,
       ),
-      css('.footer-hashtag').styles(
+      css('.footer-amp').styles(opacity: 0.6),
+      css('.footer-links', [
+        css('&').styles(
+          display: .flex,
+          gap: Gap.all(1.5.rem),
+          margin: .only(bottom: 2.rem),
+        ),
+        css('a').styles(
+          fontFamily: bodyFont,
+          fontSize: 0.95.rem,
+          color: onSurfaceVariant,
+          opacity: 0.8,
+          textDecoration: TextDecoration(line: .none),
+          transition: Transition('color', duration: const Duration(milliseconds: 200)),
+        ),
+        css('a:hover').styles(color: primaryColor, opacity: 1),
+      ]),
+      css('.footer-copy').styles(
         margin: .zero,
         fontFamily: bodyFont,
-        letterSpacing: 2.px,
-        fontSize: 0.85.rem,
-        color: primaryFixedDim,
+        fontSize: 0.95.rem,
+        color: onSurfaceVariant,
+        opacity: 0.6,
       ),
-      css('.footer-contact', [
-        css('&').styles(margin: .only(top: 0.5.rem), fontFamily: bodyFont, fontSize: 0.88.rem, color: inverseOnSurface, opacity: 0.85),
-        css('a').styles(color: secondaryFixedDim, textDecoration: TextDecoration(line: .underline)),
-      ]),
     ]),
   ];
 }

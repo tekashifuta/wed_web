@@ -14,13 +14,27 @@ class HeroSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return div(classes: 'hero', [
+      div(classes: 'hero-bg', []),
       div(classes: 'hero-overlay', []),
       div(classes: 'hero-content', [
-        p(classes: 'hero-kicker', [.text('We are getting married')]),
-        h1(classes: 'hero-title', [.text(coupleNames)]),
-        div(classes: 'hero-divider', []),
-        p(classes: 'hero-date', [.text('$weddingWeekday · $weddingDateLabel')]),
-        p(classes: 'hero-tagline', [.text(heroTagline)]),
+        p(classes: 'hero-kicker', [.text(heroKicker)]),
+        h1(classes: 'hero-title', [
+          span([.text(brideName)]),
+          br(),
+          span(classes: 'hero-amp', [.text('&')]),
+          br(),
+          span([.text(groomName)]),
+        ]),
+        div(classes: 'hero-dash', []),
+        p(classes: 'hero-date', [.text(weddingDateFull)]),
+        p(classes: 'hero-venue', [
+          .text(venueName),
+          br(),
+          .text(venueAddress1),
+          br(),
+          .text(venueAddress2),
+        ]),
+        div(classes: 'hero-florist', [.text('❀')]),
       ]),
     ]);
   }
@@ -32,18 +46,28 @@ class HeroSection extends StatelessComponent {
         position: .relative(),
         display: .flex,
         width: 100.percent,
-        minHeight: 100.vh,
+        minHeight: 92.vh,
         alignItems: .center,
         justifyContent: .center,
-        backgroundImage: ImageStyle.url(heroImageUrl),
-        backgroundSize: .cover,
-        backgroundPosition: BackgroundPosition.center,
         overflow: .clip,
+        padding: .only(top: 5.rem), // clear the fixed nav
       ),
     ]),
+    // Background photograph (wedding gazebo), softly washed out.
+    css('.hero-bg').styles(
+      position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
+      backgroundImage: ImageStyle.url(heroImageUrl),
+      backgroundSize: .cover,
+      backgroundPosition: BackgroundPosition.center,
+      opacity: 0.55,
+    ),
+    // Cream gradient overlay so the text stays legible on a light hero.
     css('.hero-overlay').styles(
       position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
-      backgroundColor: const Color('rgba(32, 26, 24, 0.45)'),
+      raw: const {
+        'background':
+            'linear-gradient(to bottom, rgba(255,248,246,0.45) 0%, rgba(255,248,246,0.65) 55%, #fff8f6 100%)',
+      },
     ),
     css('.hero-content', [
       css('&').styles(
@@ -52,53 +76,70 @@ class HeroSection extends StatelessComponent {
         display: .flex,
         flexDirection: .column,
         alignItems: .center,
-        maxWidth: 720.px,
-        padding: .symmetric(horizontal: 1.5.rem),
+        maxWidth: 780.px,
+        padding: .only(bottom: 4.rem),
         textAlign: .center,
-        color: inverseOnSurface,
+        color: onSurface,
       ),
       css('.hero-kicker').styles(
-        margin: .only(bottom: 1.25.rem),
+        margin: .only(bottom: 1.5.rem),
         letterSpacing: 5.px,
         textTransform: .upperCase,
         fontFamily: bodyFont,
         fontSize: 0.85.rem,
         fontWeight: .w600,
+        color: primaryColor,
+        opacity: 0.8,
       ),
       css('.hero-title').styles(
         margin: .zero,
         fontFamily: headingFont,
         fontSize: 5.5.rem,
         fontWeight: .w400,
-        lineHeight: 1.05.em,
-        textShadow: TextShadow(offsetX: 0.px, offsetY: 0.px, blur: 24.px, color: Color('rgba(0,0,0,0.25)')),
+        lineHeight: 1.12.em,
+        color: onSurface,
       ),
-      css('.hero-divider').styles(
-        margin: .symmetric(vertical: 1.75.rem),
-        width: 72.px,
-        height: 1.px,
-        backgroundColor: primaryFixedDim,
+      css('.hero-amp').styles(
+        fontStyle: .italic,
+        fontSize: 0.85.em,
+        color: primaryColor,
+        opacity: 0.7,
+        padding: .symmetric(horizontal: 0.4.em),
+      ),
+      css('.hero-dash').styles(
+        margin: .symmetric(vertical: 2.25.rem),
+        width: 1.px,
+        height: 4.rem,
+        backgroundColor: Color('rgba(77, 100, 78, 0.3)'),
       ),
       css('.hero-date').styles(
-        margin: .only(bottom: 1.25.rem),
-        fontFamily: headingFont,
-        fontSize: 1.35.rem,
-        fontWeight: .w400,
-        letterSpacing: 2.px,
-      ),
-      css('.hero-tagline').styles(
         margin: .zero,
-        maxWidth: 540.px,
+        fontFamily: headingFont,
+        fontSize: 1.75.rem,
+        letterSpacing: 1.px,
+        color: onSurface,
+      ),
+      css('.hero-venue').styles(
+        margin: .only(top: 1.15.rem),
+        maxWidth: 560.px,
         fontFamily: bodyFont,
         fontSize: 1.05.rem,
-        lineHeight: 1.7.em,
-        opacity: 0.92,
+        lineHeight: 1.75.em,
+        color: onSurfaceVariant,
+      ),
+      css('.hero-florist').styles(
+        margin: .only(top: 3.25.rem),
+        fontSize: 2.2.rem,
+        color: primaryColor,
+        opacity: 0.4,
       ),
     ]),
     css.media(MediaQuery.screen(maxWidth: 700.px), [
-      css('.hero-title').styles(fontSize: 3.2.rem),
-      css('.hero-date').styles(fontSize: 1.1.rem),
-      css('.hero-tagline').styles(fontSize: 0.98.rem),
+      css('.hero').styles(minHeight: 88.vh),
+      css('.hero-title').styles(fontSize: 3.4.rem),
+      css('.hero-date').styles(fontSize: 1.35.rem),
+      css('.hero-venue').styles(fontSize: 0.98.rem),
+      css('.hero-dash').styles(margin: .symmetric(vertical: 1.75.rem)),
     ]),
   ];
 }

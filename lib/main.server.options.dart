@@ -13,8 +13,7 @@ import 'package:wed_web/components/invitation/gallery_section.dart'
     as _gallery_section;
 import 'package:wed_web/components/invitation/hero_section.dart'
     as _hero_section;
-import 'package:wed_web/components/invitation/intro_section.dart'
-    as _intro_section;
+import 'package:wed_web/components/invitation/nav_bar.dart' as _nav_bar;
 import 'package:wed_web/components/invitation/rsvp_section.dart'
     as _rsvp_section;
 import 'package:wed_web/components/invitation/schedule_section.dart'
@@ -53,7 +52,7 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ..._footer_section.FooterSection.styles,
     ..._gallery_section.GallerySection.styles,
     ..._hero_section.HeroSection.styles,
-    ..._intro_section.IntroSection.styles,
+    ..._nav_bar.NavBar.styles,
     ..._rsvp_section.RsvpSection.styles,
     ..._schedule_section.ScheduleSection.styles,
     ..._story_section.StorySection.styles,
