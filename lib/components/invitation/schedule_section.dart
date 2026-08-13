@@ -36,15 +36,15 @@ class ScheduleSection extends StatelessComponent {
         display: .flex,
         flexDirection: .column,
         alignItems: .center,
-        padding: .symmetric(vertical: 5.rem, horizontal: 1.5.rem),
-        backgroundColor: gardenCream,
+        padding: .symmetric(vertical: 7.5.rem, horizontal: 1.5.rem),
+        backgroundColor: surface,
       ),
       css('.schedule-list').styles(
         display: .flex,
         flexDirection: .column,
         width: 100.percent,
-        maxWidth: 640.px,
-        margin: .only(top: 3.rem),
+        maxWidth: 680.px,
+        margin: .only(top: 3.5.rem),
       ),
     ]),
     css('.schedule-row', [
@@ -52,8 +52,8 @@ class ScheduleSection extends StatelessComponent {
         display: .flex,
         alignItems: .start,
         gap: Gap.column(1.5.rem),
-        padding: .symmetric(vertical: 1.2.rem),
-        border: .only(bottom: BorderSide.solid(color: const Color('#00000014'), width: 1.px)),
+        padding: .symmetric(vertical: 1.4.rem),
+        border: .only(bottom: BorderSide.solid(color: outlineVariant, width: 1.px)),
       ),
       css('&:last-child').styles(border: Border.only(bottom: BorderSide.none())),
     ]),
@@ -62,8 +62,8 @@ class ScheduleSection extends StatelessComponent {
       flex: Flex(shrink: 0),
       fontFamily: headingFont,
       fontWeight: .w700,
-      fontSize: 1.rem,
-      color: gardenGold,
+      fontSize: 1.05.rem,
+      color: primaryColor,
     ),
     css('.schedule-body', [
       css('h4').styles(
@@ -71,14 +71,18 @@ class ScheduleSection extends StatelessComponent {
         fontFamily: bodyFont,
         fontWeight: .w700,
         fontSize: 1.1.rem,
-        color: gardenInk,
+        color: onSurface,
       ),
       css('p').styles(
         margin: .zero,
         fontFamily: bodyFont,
         fontSize: 0.95.rem,
-        color: const Color('#6B6E62'),
+        lineHeight: 1.55.em,
+        color: onSurfaceVariant,
       ),
+    ]),
+    css.media(MediaQuery.screen(maxWidth: 600.px), [
+      css('.schedule').styles(padding: .symmetric(vertical: 4.5.rem, horizontal: 1.5.rem)),
     ]),
   ];
 }

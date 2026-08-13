@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../constants/theme.dart';
 import '../components/invitation/details_section.dart';
 import '../components/invitation/footer_section.dart';
 import '../components/invitation/gallery_section.dart';
@@ -52,24 +53,25 @@ class Invitation extends StatelessComponent {
       css('.section-kicker', [
         css('&').styles(
           margin: .zero,
-          letterSpacing: 3.px,
+          letterSpacing: 4.px,
           textTransform: .upperCase,
-          fontFamily: FontFamily('Lato'),
-          fontSize: 0.85.rem,
-          fontWeight: .w700,
-          color: const Color('#C9A24B'),
+          fontFamily: bodyFont,
+          fontSize: 0.8.rem,
+          fontWeight: .w600,
+          color: primaryColor,
         ),
-        css('&.light').styles(color: const Color('#D8CB8F')),
+        css('&.light').styles(color: primaryFixedDim),
       ]),
       css('.section-title', [
         css('&').styles(
-          margin: .only(top: 0.5.rem),
-          fontFamily: FontFamily('Playfair Display'),
-          fontSize: 2.4.rem,
+          margin: .only(top: 0.75.rem),
+          fontFamily: headingFont,
+          fontSize: 2.5.rem,
+          lineHeight: 1.1.em,
           textAlign: .center,
-          color: const Color('#33362F'),
+          color: onSurface,
         ),
-        css('&.light').styles(color: Colors.white),
+        css('&.light').styles(color: inverseOnSurface),
       ]),
     ]),
   ];

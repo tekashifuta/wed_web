@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../../constants/theme.dart';
 import '../../constants/wedding_data.dart';
 
 /// A simple photo grid gallery.
@@ -27,25 +28,26 @@ class GallerySection extends StatelessComponent {
         display: .flex,
         flexDirection: .column,
         alignItems: .center,
-        padding: .symmetric(vertical: 5.rem, horizontal: 1.5.rem),
-        backgroundColor: Colors.white,
+        padding: .symmetric(vertical: 7.5.rem, horizontal: 1.5.rem),
+        backgroundColor: const Color('#ffffff'),
       ),
       css('.gallery-grid').styles(
         display: .grid,
         gridTemplate: const GridTemplate(
           columns: GridTracks([GridTrack(TrackSize.fr(1)), GridTrack(TrackSize.fr(1)), GridTrack(TrackSize.fr(1))]),
         ),
-        gap: Gap.all(1.rem),
+        gap: Gap.all(1.25.rem),
         width: 100.percent,
-        maxWidth: 960.px,
-        margin: .only(top: 3.rem),
+        maxWidth: 1040.px,
+        margin: .only(top: 3.5.rem),
       ),
     ]),
     css('.gallery-item', [
       css('&').styles(
         overflow: .clip,
-        radius: .all(.circular(12.px)),
+        radius: .all(.circular(8.px)),
         aspectRatio: const AspectRatio(1),
+        border: Border.all(color: outlineVariant, width: 1.px),
       ),
       css('img').styles(
         width: 100.percent,
@@ -53,7 +55,7 @@ class GallerySection extends StatelessComponent {
         transition: Transition('transform', duration: const Duration(milliseconds: 400)),
         raw: const {'object-fit': 'cover'},
       ),
-      css('&:hover img').styles(transform: Transform.scale(1.08)),
+      css('&:hover img').styles(transform: Transform.scale(1.06)),
     ]),
     css.media(MediaQuery.screen(maxWidth: 700.px), [
       css('.gallery-grid').styles(
@@ -61,6 +63,9 @@ class GallerySection extends StatelessComponent {
           columns: GridTracks([GridTrack(TrackSize.fr(1)), GridTrack(TrackSize.fr(1))]),
         ),
       ),
+    ]),
+    css.media(MediaQuery.screen(maxWidth: 600.px), [
+      css('.gallery').styles(padding: .symmetric(vertical: 4.5.rem, horizontal: 1.5.rem)),
     ]),
   ];
 }
