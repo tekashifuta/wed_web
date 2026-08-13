@@ -27,14 +27,12 @@ class HeroSection extends StatelessComponent {
         ]),
         div(classes: 'hero-dash', []),
         p(classes: 'hero-date', [.text(weddingDateFull)]),
-        p(classes: 'hero-venue', [
-          .text(venueName),
-          br(),
-          .text(venueAddress1),
-          br(),
-          .text(venueAddress2),
-        ]),
+        p(classes: 'hero-venue', [.text(venueName)]),
         div(classes: 'hero-florist', [.text('❀')]),
+        div(classes: 'hero-scroll', [
+          span([.text('Scroll')]),
+          span(classes: 'hero-scroll-icon', [.text('⌄')]),
+        ]),
       ]),
     ]);
   }
@@ -133,13 +131,68 @@ class HeroSection extends StatelessComponent {
         color: primaryColor,
         opacity: 0.4,
       ),
+      // "Scroll" cue — only shown on mobile, pinned to the bottom of the hero.
+      css('.hero-scroll').styles(
+        display: .none,
+        flexDirection: .column,
+        alignItems: .center,
+        gap: Gap.column(0.35.rem),
+        fontFamily: bodyFont,
+        fontSize: 0.7.rem,
+        fontWeight: .w500,
+        letterSpacing: 3.px,
+        textTransform: .upperCase,
+        color: primaryColor,
+        opacity: 0.7,
+      ),
+      css('.hero-scroll-icon').styles(fontSize: 1.15.rem),
     ]),
     css.media(MediaQuery.screen(maxWidth: 700.px), [
-      css('.hero').styles(minHeight: 88.vh),
-      css('.hero-title').styles(fontSize: 3.4.rem),
-      css('.hero-date').styles(fontSize: 1.35.rem),
-      css('.hero-venue').styles(fontSize: 0.98.rem),
-      css('.hero-dash').styles(margin: .symmetric(vertical: 1.75.rem)),
+      css('.hero').styles(minHeight: 100.vh),
+      // Reorder so the small divider sits under the "Save the Date" label
+      // (matches the mobile design) instead of between the names and date.
+      css('.hero-kicker').styles(order: 0),
+      css('.hero-dash').styles(
+        order: 1,
+        height: 3.rem,
+        margin: .symmetric(vertical: 1.5.rem),
+      ),
+      css('.hero-title').styles(
+        order: 2,
+        fontSize: 4.5.rem,
+        lineHeight: 1.05.em,
+        letterSpacing: Unit.pixels(-1),
+        color: primaryColor,
+      ),
+      css('.hero-amp').styles(
+        fontSize: 3.rem,
+        fontStyle: .italic,
+        color: secondaryColor,
+        opacity: 0.8,
+        margin: .symmetric(vertical: Unit.rem(-0.85), horizontal: 0.2.rem),
+        position: .relative(),
+        zIndex: const ZIndex(20),
+        raw: const {'mix-blend-mode': 'multiply'},
+      ),
+      css('.hero-date').styles(
+        order: 3,
+        margin: .only(top: 3.5.rem),
+        fontFamily: bodyFont,
+        fontSize: 1.15.rem,
+        fontWeight: .w400,
+        letterSpacing: 0.px,
+      ),
+      css('.hero-venue').styles(
+        order: 4,
+        fontSize: 0.95.rem,
+        margin: .only(top: 0.5.rem),
+      ),
+      css('.hero-florist').styles(display: .none),
+      css('.hero-scroll').styles(
+        order: 5,
+        display: .flex,
+        position: Position.absolute(bottom: 2.25.rem, left: 0.px, right: 0.px),
+      ),
     ]),
   ];
 }

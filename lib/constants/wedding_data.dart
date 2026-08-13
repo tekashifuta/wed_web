@@ -19,40 +19,37 @@ const monogram = 'R & D';
 
 /// Wedding date info.
 const weddingWeekday = 'Saturday';
-const weddingDateFull = 'December 20, 2026';
+const weddingDateFull = 'September 12, 2026';
 
 /// The small uppercase kicker shown above the couple's names (matches the
-/// Stitch "Wedding Home" hero).
-const heroKicker = 'The Wedding Of';
+/// Stitch mobile "Wedding Home" hero).
+const heroKicker = 'Save the Date';
 
-/// Hero background image — the wedding gazebo (from the Stitch design).
+/// Hero background image — the botanical garden (from the Stitch mobile design).
 const heroImageUrl =
-    'https://lh3.googleusercontent.com/aida/AP1WRLvfF4f7QxvNb5R7stIgIYBM-B2KsWXmPU08nc-cRy6lEFz9kzuYPLeBRmRk_cNJoQrGy0imQit7O9JmGJBKo1hbg5puw3Ubsu3Y0b52JV1Bb7jZwigjW_LZfhoOl8ZA_gHP5ctSEKBJ7j_YDTdsPX7DdFw1CDbpvwMvCmM5JUxneKEohsXEiia0x8Fh2dnsu2InCcbip2in8DCP-FBZLfYuxtn30q2kXRkyb9y11Um99QZkak3tyS41u3Ah';
+    'https://lh3.googleusercontent.com/aida/AP1WRLsP1MGh_fv8khpKAJEL83UH2uf9ufpoTLLyrNvbUuusTN87ak0awBIRsX6t8FIHUeJOmGWPlzageMuD6OAu_LSR7vUjGOyFzZIixT5vDrbt-UzJ7-LU7zuoZLRzoDo5b-UvaWpIRZWujT8u-BTfIrUcZwScP6quuzvm59ZqrLHJXe71BNQiHAnyL60PjuRuaQ_OVjAJH6w6974E7S0wdc3jgsFsrDp8l2fztoTfmUggqNCcLKk_F1T_Tw6T';
 
-/// Venue details shown in the hero and reused by the ceremony/reception cards.
-const venueName = 'Velvet & Stone Hotel';
-const venueAddress1 = '45 Park Lane, Historic District';
-const venueAddress2 = 'Savannah, GA';
+/// Venue details shown in the hero.
+const venueName = 'The Botanical Gardens';
 
-/// "Our Story" paragraphs (from the Stitch design).
+/// "Our Story" paragraph (from the Stitch mobile design).
 const storyParagraphs = [
-  'It began with a chance meeting in a small coffee shop in the historic district. What started as a shared table quickly blossomed into shared dreams, long walks under the Spanish moss, and a quiet understanding that we had found something rare.',
-  'Over the years, our love has grown through countless adventures, quiet Sunday mornings, and the unwavering support we find in each other. We are so excited to gather our closest family and friends to celebrate the beginning of our next chapter.',
+  'From a chance meeting in a sunlit garden to a lifetime of adventures together. We are overjoyed to invite you to celebrate our love story surrounded by the beauty of nature.',
 ];
 
-/// "Our Story" photograph — the couple (from the Stitch design).
+/// "Our Story" photograph — the couple inside the arch frame (Stitch mobile).
 const storyImageUrl =
-    'https://lh3.googleusercontent.com/aida/AP1WRLvBnzYDMj0-Dxzdv5r6HAYG7Q6yOmOWgIgyx2hXjf44aDe2Qeeaxo3DFNh23YY_ZqbLmBxcR7Z1eCf2-uzXACF_BlX3Wkl7NK8f01JiEHBQQbx2TH7B4vAwNB4JKILRLCzUKhvGkllsv9Z9ZA869_Zg1RCVOXGGlrSgpmDCHUbz0M453YW-dM6-p47LlrGbsVrwo6DaKcdh8WfHzDdDwcZ6vZ2Sd786SiQnTQ4HlkLWW4-_fdPtcIbK3jZq';
+    'https://lh3.googleusercontent.com/aida/AP1WRLvYyGpkO3eIEGUyt0U-30v7atp_MTr6J070p2AbqZ8xPKP_p6ISclCuJJfZRyJjdpQ3NCXdUk2uVhZG2V0KuDcV7BTXuQJxaT0BhxfyGcw10fThd5gaV8WPby7Dk6KFkwyoV-mWAmlIYNMf-iC6S1Pto_ks6GfA3KAANFE5BNA2LUHP2edZWHL-XzS6NpDXE9NndlghMUqtXdTo5fgyQ7Q-E7tlKCBK19AALfSlh3W-MIKSArAYSANFYqQ-';
 
-/// Ceremony details (same venue as the hero).
+/// Ceremony details.
 const ceremonyTime = '4:00 PM';
-const ceremonyVenue = venueName;
-const ceremonyAddress = '$venueAddress1, $venueAddress2';
+const ceremonyVenue = 'The Heritage Gazebo';
+const ceremonyAddress = '123 Botanical Way, Floral City';
 
-/// Reception details (same venue as the hero).
+/// Reception details.
 const receptionTime = '6:30 PM';
-const receptionVenue = venueName;
-const receptionAddress = '$venueAddress1, $venueAddress2';
+const receptionVenue = 'The Botanical Gardens';
+const receptionAddress = '1 Conservatory Drive, Floral City';
 
 /// Day-of schedule entries: (time, title, description).
 const scheduleItems = [

@@ -109,10 +109,33 @@ class StorySection extends StatelessComponent {
       raw: const {'object-fit': 'cover'},
     ),
     css.media(MediaQuery.screen(maxWidth: 700.px), [
-      css('.story').styles(padding: .symmetric(vertical: 4.5.rem, horizontal: 1.5.rem)),
-      css('.story-grid').styles(flexDirection: .column, gap: Gap.all(2.5.rem)),
-      css('.story-image-wrap').styles(order: -1, maxWidth: Unit.unset, width: 100.percent),
-      css('.story-heading').styles(margin: .only(bottom: 1.5.rem)),
+      css('.story').styles(
+        padding: .symmetric(vertical: 4.5.rem, horizontal: 1.5.rem),
+        backgroundColor: surface,
+      ),
+      css('.story-grid').styles(
+        flexDirection: .column,
+        alignItems: .center,
+        gap: Gap.all(2.5.rem),
+      ),
+      css('.story-text').styles(
+        display: .flex,
+        flexDirection: .column,
+        alignItems: .center,
+        textAlign: .center,
+      ),
+      css('.story-paragraph').styles(maxWidth: 22.rem),
+      css('.story-image-wrap').styles(order: 1, maxWidth: 22.rem, width: 100.percent),
+      // Arch frame (top fully rounded, square bottom) like the mobile design.
+      css('.story-image').styles(
+        radius: .all(.circular(0.px)),
+        raw: const {
+          'border-radius': '9999px 9999px 0 0',
+          'object-fit': 'cover',
+        },
+      ),
+      css('.story-line').styles(display: .none),
+      css('.story-heading').styles(justifyContent: .center, width: 100.percent),
       css('.story-heading h2').styles(fontSize: 2.rem),
     ]),
   ];
