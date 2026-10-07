@@ -17,18 +17,18 @@ class HeroSection extends StatelessComponent {
       div(classes: 'hero-bg', []),
       div(classes: 'hero-overlay', []),
       div(classes: 'hero-content', [
-        p(classes: 'hero-kicker', [.text(heroKicker)]),
-        h1(classes: 'hero-title', [
+        p(classes: 'hero-kicker', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [.text(heroKicker)]),
+        h1(classes: 'hero-title', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [
           span([.text(brideName)]),
           br(),
           span(classes: 'hero-amp', [.text('&')]),
           br(),
           span([.text(groomName)]),
         ]),
-        div(classes: 'hero-dash', []),
-        p(classes: 'hero-date', [.text(weddingDateFull)]),
-        p(classes: 'hero-venue', [.text(venueName)]),
-        div(classes: 'hero-florist', [.text('❀')]),
+        div(classes: 'hero-dash', attributes: {'data-scroll': '', 'data-scroll-delay': '3'}, []),
+        p(classes: 'hero-date', attributes: {'data-scroll': '', 'data-scroll-delay': '3'}, [.text(weddingDateFull)]),
+        p(classes: 'hero-venue', attributes: {'data-scroll': '', 'data-scroll-delay': '4'}, [.text(venueName)]),
+        div(classes: 'hero-florist', attributes: {'data-scroll': '', 'data-scroll-delay': '5'}, [.text('❀')]),
         div(classes: 'hero-scroll', [
           span([.text('Scroll')]),
           span(classes: 'hero-scroll-icon', [.text('⌄')]),

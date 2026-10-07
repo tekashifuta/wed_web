@@ -26,6 +26,21 @@ import '../components/invitation/story_section.dart';
 class Invitation extends StatelessComponent {
   const Invitation({super.key});
 
+  /// Inline IntersectionObserver script that watches all [data-scroll]
+  /// elements and adds `.in-view` when they enter the viewport.
+  static const _scrollObserverJs = r'''
+(function(){
+  function init(){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in-view');});
+    },{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('[data-scroll]').forEach(function(el){io.observe(el);});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+''';
+
   @override
   Component build(BuildContext context) {
     return div(classes: 'invitation-page', [
@@ -37,6 +52,8 @@ class Invitation extends StatelessComponent {
       const GallerySection(),
       const RsvpSection(),
       const FooterSection(),
+      // Scroll-animation observer — runs once on the client.
+      script(id: 'scroll-observer', content: _scrollObserverJs),
     ]);
   }
 
@@ -74,5 +91,82 @@ class Invitation extends StatelessComponent {
         css('&.light').styles(color: inverseOnSurface),
       ]),
     ]),
+
+    // -------------------------------------------------------------------
+    // 🎞️  Scroll-reveal animation system
+    //
+    // Any element with [data-scroll] starts hidden and transitions in
+    // when the IntersectionObserver adds `.in-view`.
+    //
+    // Variants:
+    //   data-scroll            → fade-up  (default)
+    //   data-scroll="left"     → slide in from left
+    //   data-scroll="right"    → slide in from right
+    //   data-scroll="scale"    → scale up
+    //
+    // Stagger with:  data-scroll-delay="1" … "6"  (100 ms steps)
+    // -------------------------------------------------------------------
+
+    // Default: fade-up
+    css('[data-scroll]', [
+      css('&').styles(
+        opacity: 0,
+        transform: Transform.translate(y: 32.px),
+        transition: const Transition(
+          'all',
+          duration: Duration(milliseconds: 800),
+          curve: Curve.cubicBezier(0.22, 1, 0.36, 1),
+        ),
+      ),
+      css('&.in-view').styles(
+        opacity: 1,
+        transform: Transform.none,
+      ),
+    ]),
+
+    // Variant: slide from left
+    css('[data-scroll="left"]', [
+      css('&').styles(
+        opacity: 0,
+        transform: Transform.translate(x: Unit.pixels(-48)),
+      ),
+      css('&.in-view').styles(
+        opacity: 1,
+        transform: Transform.none,
+      ),
+    ]),
+
+    // Variant: slide from right
+    css('[data-scroll="right"]', [
+      css('&').styles(
+        opacity: 0,
+        transform: Transform.translate(x: 48.px),
+      ),
+      css('&.in-view').styles(
+        opacity: 1,
+        transform: Transform.none,
+      ),
+    ]),
+
+    // Variant: scale up
+    css('[data-scroll="scale"]', [
+      css('&').styles(
+        opacity: 0,
+        transform: Transform.scale(0.88),
+      ),
+      css('&.in-view').styles(
+        opacity: 1,
+        transform: Transform.none,
+      ),
+    ]),
+
+    // Stagger delays (100 ms steps) — use raw CSS since transitionDelay
+    // is not a typed parameter in Jaspr's styles API.
+    css('[data-scroll-delay="1"]').styles(raw: const {'transition-delay': '100ms'}),
+    css('[data-scroll-delay="2"]').styles(raw: const {'transition-delay': '200ms'}),
+    css('[data-scroll-delay="3"]').styles(raw: const {'transition-delay': '300ms'}),
+    css('[data-scroll-delay="4"]').styles(raw: const {'transition-delay': '400ms'}),
+    css('[data-scroll-delay="5"]').styles(raw: const {'transition-delay': '500ms'}),
+    css('[data-scroll-delay="6"]').styles(raw: const {'transition-delay': '600ms'}),
   ];
 }

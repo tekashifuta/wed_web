@@ -11,11 +11,13 @@ class DetailsSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return div(classes: 'details', [
-      p(classes: 'section-kicker', [.text('Event Details')]),
-      h2(classes: 'section-title', [.text('When & Where')]),
+      p(classes: 'section-kicker', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [.text('Event Details')]),
+      h2(classes: 'section-title', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [.text('When & Where')]),
       div(classes: 'details-cards', [
-        _detailsCard(icon: '💐', title: 'Ceremony', time: ceremonyTime, venue: ceremonyVenue, address: ceremonyAddress),
-        _detailsCard(icon: '🥂', title: 'Reception', time: receptionTime, venue: receptionVenue, address: receptionAddress),
+        _detailsCard(
+            icon: '💐', title: 'Ceremony', time: ceremonyTime, venue: ceremonyVenue, address: ceremonyAddress, delay: '3'),
+        _detailsCard(
+            icon: '🥂', title: 'Reception', time: receptionTime, venue: receptionVenue, address: receptionAddress, delay: '4'),
       ]),
     ]);
   }
@@ -26,8 +28,9 @@ class DetailsSection extends StatelessComponent {
     required String time,
     required String venue,
     required String address,
+    required String delay,
   }) {
-    return div(classes: 'details-card', [
+    return div(classes: 'details-card', attributes: {'data-scroll': '', 'data-scroll-delay': delay}, [
       div(classes: 'details-icon', [.text(icon)]),
       h3([.text(title)]),
       p(classes: 'details-time', [.text(time)]),

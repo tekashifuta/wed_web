@@ -10,7 +10,7 @@ class FooterSection extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-    return footer(classes: 'invite-footer', [
+    return footer(classes: 'invite-footer', attributes: {'data-scroll': ''}, [
       div(classes: 'footer-brand', [
         span([.text('R ')]),
         span(classes: 'footer-amp', [.text('&')]),

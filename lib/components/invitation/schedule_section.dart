@@ -13,18 +13,22 @@ class ScheduleSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return div(classes: 'schedule', [
-      p(classes: 'section-kicker', [.text('Order of the Day')]),
-      h2(classes: 'section-title', [.text('Schedule')]),
+      p(classes: 'section-kicker', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [.text('Order of the Day')]),
+      h2(classes: 'section-title', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [.text('Schedule')]),
       div(classes: 'schedule-list', [
-        for (final item in scheduleItems)
-          div(classes: 'schedule-row', [
-            div(classes: 'schedule-time', [.text(item.time)]),
-            div(classes: 'schedule-line', []),
-            div(classes: 'schedule-body', [
-              h4([.text(item.title)]),
-              p([.text(item.description)]),
-            ]),
-          ]),
+        for (var i = 0; i < scheduleItems.length; i++)
+          div(
+            classes: 'schedule-row',
+            attributes: {'data-scroll': '', 'data-scroll-delay': '${i + 1}'},
+            [
+              div(classes: 'schedule-time', [.text(scheduleItems[i].time)]),
+              div(classes: 'schedule-line', []),
+              div(classes: 'schedule-body', [
+                h4([.text(scheduleItems[i].title)]),
+                p([.text(scheduleItems[i].description)]),
+              ]),
+            ],
+          ),
       ]),
     ]);
   }

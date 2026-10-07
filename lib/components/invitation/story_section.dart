@@ -14,7 +14,7 @@ class StorySection extends StatelessComponent {
   Component build(BuildContext context) {
     return div(classes: 'story', [
       div(classes: 'story-grid', [
-        div(classes: 'story-text', [
+        div(classes: 'story-text', attributes: {'data-scroll': 'left'}, [
           div(classes: 'story-heading', [
             div(classes: 'story-line', []),
             h2([.text('Our Story')]),
@@ -22,7 +22,7 @@ class StorySection extends StatelessComponent {
           for (final paragraph in storyParagraphs)
             p(classes: 'story-paragraph', [.text(paragraph)]),
         ]),
-        div(classes: 'story-image-wrap', [
+        div(classes: 'story-image-wrap', attributes: {'data-scroll': 'right'}, [
           div(classes: 'story-accent', []),
           img(classes: 'story-image', src: storyImageUrl, alt: 'Rose and Daryl — an intimate couple photograph'),
         ]),

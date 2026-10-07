@@ -14,10 +14,12 @@ class RsvpSection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return div(classes: 'rsvp', [
-      p(classes: 'section-kicker light', [.text('Join Us')]),
-      h2(classes: 'section-title light', [.text('RSVP')]),
-      p(classes: 'rsvp-note', [.text('Kindly respond by $rsvpDeadline so we can prepare a seat with your name on it.')]),
-      form(classes: 'rsvp-form', [
+      p(classes: 'section-kicker light', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [.text('Join Us')]),
+      h2(classes: 'section-title light', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [.text('RSVP')]),
+      p(classes: 'rsvp-note', attributes: {'data-scroll': '', 'data-scroll-delay': '3'}, [
+        .text('Kindly respond by $rsvpDeadline so we can prepare a seat with your name on it.')
+      ]),
+      form(classes: 'rsvp-form', attributes: {'data-scroll': '', 'data-scroll-delay': '4'}, [
         div(classes: 'rsvp-row', [
           input(type: InputType.text, name: 'name', attributes: {'placeholder': 'Full Name', 'required': ''}),
           input(type: InputType.email, name: 'email', attributes: {'placeholder': 'Email Address', 'required': ''}),

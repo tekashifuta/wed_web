@@ -13,10 +13,15 @@ class GallerySection extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return div(classes: 'gallery', [
-      p(classes: 'section-kicker', [.text('Moments')]),
-      h2(classes: 'section-title', [.text('Our Gallery')]),
+      p(classes: 'section-kicker', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [.text('Moments')]),
+      h2(classes: 'section-title', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [.text('Our Gallery')]),
       div(classes: 'gallery-grid', [
-        for (final url in galleryImages) div(classes: 'gallery-item', [img(src: url, alt: 'Gallery photo')]),
+        for (var i = 0; i < galleryImages.length; i++)
+          div(
+            classes: 'gallery-item',
+            attributes: {'data-scroll': 'scale', 'data-scroll-delay': '${(i % 6) + 1}'},
+            [img(src: galleryImages[i], alt: 'Gallery photo')],
+          ),
       ]),
     ]);
   }
