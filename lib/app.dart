@@ -19,7 +19,7 @@ class App extends StatelessComponent {
     return div(classes: 'main', [
       Router(
         routes: [
-          Route(path: '/', title: 'Our Wedding Invitation', builder: (context, state) => const Invitation()),
+          Route(path: '/', title: 'Rose & Daryl — Wedding Invitation', builder: (context, state) => const Invitation()),
         ],
       ),
     ]);

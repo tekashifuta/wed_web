@@ -1,53 +1,70 @@
 import 'package:jaspr/dom.dart';
 
 // -----------------------------------------------------------------------
-// 🌿 "Garden Ethereal" Design Tokens
+// 🌹 "Romantic" Design Tokens
 //
-// Recreated from DESIGN.md. Edit the colors and fonts below to restyle the
-// whole invitation site. Every section pulls from these single source tokens.
+// A warm, editorial palette (paper · champagne · antique gold · sage ·
+// charcoal) inspired by the Ceremo *Romantic* invitation template.
+// Edit the colors and fonts below to restyle the whole invitation site.
+// Every section pulls from these single source tokens.
 // -----------------------------------------------------------------------
 
 // -- Color tokens -------------------------------------------------------
-// Warm "paper" surface + warm charcoal ink (Neutral).
-const Color surface = Color('#fff8f6'); // primary page background
-const Color surfaceContainer = Color('#f8ebe7'); // subtle tonal layer
-const Color surfaceContainerLow = Color('#fef1ec');
-const Color surfaceContainerHigh = Color('#f3e5e1');
-const Color onSurface = Color('#201a18'); // warm charcoal text
-const Color onSurfaceVariant = Color('#434842');
-const Color outlineTone = Color('#737971');
-const Color outlineVariant = Color('#c3c8bf');
-const Color inverseSurface = Color('#362f2c'); // dark footer band
-const Color inverseOnSurface = Color('#fbeee9');
+// Warm "paper" surface + charcoal ink.
+const Color surface = Color('#fbf8f3'); // primary page background
+const Color surfaceContainer = Color('#f4ede3'); // subtle tonal layer
+const Color surfaceContainerLow = Color('#f7f2ea');
+const Color surfaceContainerHigh = Color('#ede4d8');
+const Color onSurface = Color('#332e2a'); // charcoal text
+const Color onSurfaceVariant = Color('#6e665c');
+const Color outlineTone = Color('#8d857a');
+const Color outlineVariant = Color('#ded5c7');
+const Color inverseSurface = Color('#2c2724'); // dark bands
+const Color inverseOnSurface = Color('#f6efe6');
 
-// Primary — Sage Green (the "garden" element).
-const Color primaryColor = Color('#4d644e');
+// Primary — Antique gold (the romantic metallic accent).
+const Color primaryColor = Color('#8a6b40');
 const Color onPrimary = Color('#ffffff');
-const Color primaryContainer = Color('#8fa88e');
-const Color onPrimaryContainer = Color('#273d29');
-const Color primaryFixedDim = Color('#b4cdb2'); // light sage for botanical accents
+const Color primaryContainer = Color('#e8d9be'); // champagne
+const Color onPrimaryContainer = Color('#4a3a20');
+const Color primaryFixedDim = Color('#c9ae7e');
 
-// Secondary — Blush (celebratory highlights).
-const Color secondaryColor = Color('#6f5959');
-const Color secondaryContainer = Color('#f6d9d9');
-const Color onSecondaryContainer = Color('#735d5e');
-const Color secondaryFixedDim = Color('#dcc0c0');
+// Secondary — Sage (the "garden" element).
+const Color secondaryColor = Color('#7c8a72');
+const Color secondaryContainer = Color('#e4e8dc');
+const Color onSecondaryContainer = Color('#3e4638');
+const Color secondaryFixedDim = Color('#b9c3af');
+
+// Tertiary — Soft rose (romantic highlights).
+const Color accentColor = Color('#c08a86');
+const Color accentContainer = Color('#f6e3e1');
+const Color onAccentContainer = Color('#5c3a38');
 
 // Error (kept for completeness / form validation).
-const Color errorColor = Color('#ba1a1a');
+const Color errorColor = Color('#a93b3b');
 
 // -- Typography tokens --------------------------------------------------
-// High-contrast serif for headlines; clean modern sans for body + labels.
-const headingFont = FontFamily('Playfair Display');
-const bodyFont = FontFamily('Manrope');
+// High-contrast elegant serif for headlines; clean geometric sans for body.
+const headingFont = FontFamily('Cormorant Garamond');
+const bodyFont = FontFamily('Jost');
 
-/// Low-opacity ambient shadow for floating elements (nav, cards on tinted
-/// bands). Extremely diffused, Neutral at ~8% (Design.md elevation guide).
+/// Handwritten accent used for sign-offs ("With love,").
+const scriptFont = FontFamily('Great Vibes');
+
+/// Low-opacity ambient shadow for floating cards.
 BoxShadow get ambientShadow => BoxShadow(
   offsetX: 0.px,
-  offsetY: 12.px,
-  blur: 40.px,
-  color: Color('rgba(32, 26, 24, 0.08)'),
+  offsetY: 18.px,
+  blur: 50.px,
+  color: Color('rgba(51, 46, 42, 0.08)'),
+);
+
+/// Tighter shadow used for small chips and buttons.
+BoxShadow get softShadow => BoxShadow(
+  offsetX: 0.px,
+  offsetY: 6.px,
+  blur: 20.px,
+  color: Color('rgba(51, 46, 42, 0.06)'),
 );
 
 // -----------------------------------------------------------------------
@@ -57,9 +74,15 @@ BoxShadow get ambientShadow => BoxShadow(
 // Defines the global CSS styles for this project.
 @css
 List<StyleRule> get styles => [
-  // Google Fonts: Playfair Display (headlines) + Manrope (body/labels).
+  // Google Fonts: Cormorant Garamond (headlines) + Jost (body) + Great Vibes.
   css.import(
-    'https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap',
+    'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap',
+  ),
+  css('html').styles(
+    raw: const {
+      'scroll-behavior': 'smooth',
+      'scroll-padding-top': '4.5rem',
+    },
   ),
   css('html, body').styles(
     width: 100.percent,
@@ -70,10 +93,17 @@ List<StyleRule> get styles => [
     backgroundColor: surface,
     color: onSurface,
   ),
+  // Locks the page while the cover screen is open (removed by JS).
+  css('html.no-scroll, body.no-scroll').styles(
+    raw: const {'overflow': 'hidden'},
+  ),
   css('h1, h2, h3, h4').styles(
     margin: .unset,
     fontFamily: headingFont,
     fontWeight: .w400,
   ),
+  // Predictable sizing for padded/full-width elements.
+  css('*, *::before, *::after').styles(
+    raw: const {'box-sizing': 'border-box'},
+  ),
 ];
-

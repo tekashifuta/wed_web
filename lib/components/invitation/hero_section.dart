@@ -4,31 +4,44 @@ import 'package:jaspr/jaspr.dart';
 import '../../constants/theme.dart';
 import '../../constants/wedding_data.dart';
 
-/// The full-bleed hero section at the top of the invitation page.
+/// Full-bleed hero: names, date, church/venue and a **live countdown**.
 ///
-/// Edit the couple's names, date and tagline in `lib/constants/wedding_data.dart`.
-/// Edit colors/fonts in `lib/constants/theme.dart`.
+/// The countdown values are updated every second by the inline script in
+/// `pages/invitation.dart` (see the `cd-*` element ids below).
 class HeroSection extends StatelessComponent {
   const HeroSection({super.key});
 
+  /// Ids consumed by the countdown script.
+  static const _ids = ['cd-days', 'cd-hours', 'cd-mins', 'cd-secs'];
+
+  /// Placeholder values shown before the script runs.
+  static const _initial = ['000', '00', '00', '00'];
+
   @override
   Component build(BuildContext context) {
-    return div(classes: 'hero', [
+    return div(id: 'home', classes: 'hero', [
       div(classes: 'hero-bg', []),
       div(classes: 'hero-overlay', []),
       div(classes: 'hero-content', [
-        p(classes: 'hero-kicker', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [.text(heroKicker)]),
-        h1(classes: 'hero-title', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [
+        p(classes: 'hero-eyebrow', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [
+          .text(heroInvitationLabel),
+        ]),
+        h1(classes: 'hero-names', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [
           span([.text(brideName)]),
-          br(),
           span(classes: 'hero-amp', [.text('&')]),
-          br(),
           span([.text(groomName)]),
         ]),
-        div(classes: 'hero-dash', attributes: {'data-scroll': '', 'data-scroll-delay': '3'}, []),
-        p(classes: 'hero-date', attributes: {'data-scroll': '', 'data-scroll-delay': '3'}, [.text(weddingDateFull)]),
-        p(classes: 'hero-venue', attributes: {'data-scroll': '', 'data-scroll-delay': '4'}, [.text(venueName)]),
-        div(classes: 'hero-florist', attributes: {'data-scroll': '', 'data-scroll-delay': '5'}, [.text('❀')]),
+        div(classes: 'hero-meta', attributes: {'data-scroll': '', 'data-scroll-delay': '3'}, [
+          p(classes: 'hero-date', [.text('$weddingWeekday, $weddingDateFull')]),
+          p(classes: 'hero-place', [.text('$heroChurchName · $heroVenueName')]),
+        ]),
+        div(classes: 'countdown', attributes: {'data-scroll': 'scale', 'data-scroll-delay': '4'}, [
+          for (var i = 0; i < countdownLabels.length; i++)
+            div(classes: 'countdown-cell', [
+              span(id: _ids[i], classes: 'countdown-value', [.text(_initial[i])]),
+              span(classes: 'countdown-label', [.text(countdownLabels[i])]),
+            ]),
+        ]),
         div(classes: 'hero-scroll', [
           span([.text('Scroll')]),
           span(classes: 'hero-scroll-icon', [.text('⌄')]),
@@ -43,30 +56,30 @@ class HeroSection extends StatelessComponent {
       css('&').styles(
         position: .relative(),
         display: .flex,
-        width: 100.percent,
-        minHeight: 92.vh,
         alignItems: .center,
         justifyContent: .center,
+        width: 100.percent,
+        minHeight: 100.vh,
+        padding: .only(top: 4.5.rem),
         overflow: .clip,
-        padding: .only(top: 5.rem), // clear the fixed nav
+        backgroundColor: inverseSurface,
+      ),
+      css('.hero-bg').styles(
+        position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
+        backgroundImage: ImageStyle.url(heroImageUrl),
+        backgroundSize: .cover,
+        backgroundPosition: BackgroundPosition.center,
+        opacity: 0.62,
+      ),
+      css('.hero-overlay').styles(
+        position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
+        raw: const {
+          'background':
+              'linear-gradient(to bottom, rgba(24, 20, 17, 0.62) 0%, rgba(24, 20, 17, 0.34) 45%, rgba(24, 20, 17, 0.78) 100%)',
+        },
       ),
     ]),
-    // Background photograph (wedding gazebo), softly washed out.
-    css('.hero-bg').styles(
-      position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
-      backgroundImage: ImageStyle.url(heroImageUrl),
-      backgroundSize: .cover,
-      backgroundPosition: BackgroundPosition.center,
-      opacity: 0.55,
-    ),
-    // Cream gradient overlay so the text stays legible on a light hero.
-    css('.hero-overlay').styles(
-      position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
-      raw: const {
-        'background':
-            'linear-gradient(to bottom, rgba(255,248,246,0.45) 0%, rgba(255,248,246,0.65) 55%, #fff8f6 100%)',
-      },
-    ),
+
     css('.hero-content', [
       css('&').styles(
         position: .relative(),
@@ -74,125 +87,143 @@ class HeroSection extends StatelessComponent {
         display: .flex,
         flexDirection: .column,
         alignItems: .center,
-        maxWidth: 780.px,
-        padding: .only(bottom: 4.rem),
+        width: 100.percent,
+        maxWidth: 60.rem,
+        padding: .symmetric(vertical: 2.rem, horizontal: 1.5.rem),
         textAlign: .center,
-        color: onSurface,
+        color: inverseOnSurface,
       ),
-      css('.hero-kicker').styles(
-        margin: .only(bottom: 1.5.rem),
-        letterSpacing: 5.px,
-        textTransform: .upperCase,
-        fontFamily: bodyFont,
-        fontSize: 0.85.rem,
-        fontWeight: .w600,
-        color: primaryColor,
-        opacity: 0.8,
-      ),
-      css('.hero-title').styles(
+      css('.hero-eyebrow').styles(
         margin: .zero,
+        fontFamily: bodyFont,
+        fontSize: 0.72.rem,
+        fontWeight: .w500,
+        letterSpacing: 6.px,
+        textTransform: .upperCase,
+        color: primaryFixedDim,
+      ),
+      css('.hero-names').styles(
+        margin: .only(top: 1.5.rem),
         fontFamily: headingFont,
-        fontSize: 5.5.rem,
+        fontSize: 6.2.rem,
         fontWeight: .w400,
-        lineHeight: 1.12.em,
-        color: onSurface,
+        lineHeight: 1.02.em,
+        letterSpacing: 1.px,
+        color: inverseOnSurface,
       ),
       css('.hero-amp').styles(
+        margin: .symmetric(horizontal: 1.rem),
         fontStyle: .italic,
-        fontSize: 0.85.em,
-        color: primaryColor,
-        opacity: 0.7,
-        padding: .symmetric(horizontal: 0.4.em),
+        fontSize: 0.6.em,
+        color: primaryFixedDim,
+        opacity: 0.95,
       ),
-      css('.hero-dash').styles(
-        margin: .symmetric(vertical: 2.25.rem),
-        width: 1.px,
-        height: 4.rem,
-        backgroundColor: Color('rgba(77, 100, 78, 0.3)'),
+      css('.hero-meta').styles(
+        margin: .only(top: 1.9.rem),
+        display: .flex,
+        flexDirection: .column,
+        alignItems: .center,
+        gap: Gap.column(0.5.rem),
       ),
       css('.hero-date').styles(
         margin: .zero,
         fontFamily: headingFont,
-        fontSize: 1.75.rem,
-        letterSpacing: 1.px,
-        color: onSurface,
+        fontSize: 1.85.rem,
+        letterSpacing: 2.px,
+        color: inverseOnSurface,
       ),
-      css('.hero-venue').styles(
-        margin: .only(top: 1.15.rem),
-        maxWidth: 560.px,
+      css('.hero-place').styles(
+        margin: .zero,
         fontFamily: bodyFont,
-        fontSize: 1.05.rem,
-        lineHeight: 1.75.em,
-        color: onSurfaceVariant,
+        fontSize: 0.74.rem,
+        fontWeight: .w400,
+        letterSpacing: 4.px,
+        textTransform: .upperCase,
+        color: const Color('rgba(246, 239, 230, 0.8)'),
       ),
-      css('.hero-florist').styles(
-        margin: .only(top: 3.25.rem),
-        fontSize: 2.2.rem,
-        color: primaryColor,
-        opacity: 0.4,
-      ),
-      // "Scroll" cue — only shown on mobile, pinned to the bottom of the hero.
-      css('.hero-scroll').styles(
-        display: .none,
-        flexDirection: .column,
+      css('.countdown').styles(
+        margin: .only(top: 2.75.rem),
+        display: .flex,
         alignItems: .center,
-        gap: Gap.column(0.35.rem),
+        justifyContent: .center,
+        raw: const {'flex-wrap': 'wrap'},
+      ),
+      css('.countdown-cell', [
+        css('&').styles(
+          position: .relative(),
+          display: .flex,
+          flexDirection: .column,
+          alignItems: .center,
+          padding: .symmetric(horizontal: 1.75.rem),
+        ),
+        css('& + .countdown-cell').styles(
+          border: .only(left: BorderSide.solid(color: Color('rgba(246, 239, 230, 0.28)'), width: 1.px)),
+        ),
+      ]),
+      css('.countdown-value').styles(
+        minWidth: 3.2.rem,
+        textAlign: .center,
+        fontFamily: headingFont,
+        fontSize: 2.5.rem,
+        fontWeight: .w400,
+        lineHeight: 1.em,
+        color: inverseOnSurface,
+        raw: const {'font-variant-numeric': 'tabular-nums'},
+      ),
+      css('.countdown-label').styles(
+        margin: .only(top: 0.5.rem),
         fontFamily: bodyFont,
-        fontSize: 0.7.rem,
+        fontSize: 0.6.rem,
         fontWeight: .w500,
         letterSpacing: 3.px,
         textTransform: .upperCase,
-        color: primaryColor,
-        opacity: 0.7,
+        color: const Color('rgba(246, 239, 230, 0.68)'),
       ),
-      css('.hero-scroll-icon').styles(fontSize: 1.15.rem),
+      css('.hero-scroll').styles(
+        margin: .only(top: 3.25.rem),
+        display: .flex,
+        flexDirection: .column,
+        alignItems: .center,
+        gap: Gap.column(0.25.rem),
+        fontFamily: bodyFont,
+        fontSize: 0.6.rem,
+        fontWeight: .w500,
+        letterSpacing: 3.px,
+        textTransform: .upperCase,
+        color: const Color('rgba(246, 239, 230, 0.6)'),
+      ),
+      css('.hero-scroll-icon').styles(
+        fontSize: 1.1.rem,
+        animation: const Animation(
+          name: 'heroBounce',
+          duration: Duration(seconds: 2),
+          count: 100,
+          curve: Curve.easeInOut,
+        ),
+      ),
+    ]),
+
+    // Gentle bob for the scroll cue.
+    css.keyframes('heroBounce', {
+      '0%, 100%': Styles(transform: Transform.translate(y: 0.px)),
+      '50%': Styles(transform: Transform.translate(y: 6.px)),
+    }),
+
+    css.media(MediaQuery.screen(maxWidth: 900.px), [
+      css('.hero-names').styles(fontSize: 5.rem),
     ]),
     css.media(MediaQuery.screen(maxWidth: 700.px), [
-      css('.hero').styles(minHeight: 100.vh),
-      // Reorder so the small divider sits under the "Save the Date" label
-      // (matches the mobile design) instead of between the names and date.
-      css('.hero-kicker').styles(order: 0),
-      css('.hero-dash').styles(
-        order: 1,
-        height: 3.rem,
-        margin: .symmetric(vertical: 1.5.rem),
-      ),
-      css('.hero-title').styles(
-        order: 2,
-        fontSize: 4.5.rem,
-        lineHeight: 1.05.em,
-        letterSpacing: Unit.pixels(-1),
-        color: primaryColor,
-      ),
-      css('.hero-amp').styles(
-        fontSize: 3.rem,
-        fontStyle: .italic,
-        color: secondaryColor,
-        opacity: 0.8,
-        margin: .symmetric(vertical: Unit.rem(-0.85), horizontal: 0.2.rem),
-        position: .relative(),
-        zIndex: const ZIndex(20),
-        raw: const {'mix-blend-mode': 'multiply'},
-      ),
-      css('.hero-date').styles(
-        order: 3,
-        margin: .only(top: 3.5.rem),
-        fontFamily: bodyFont,
-        fontSize: 1.15.rem,
-        fontWeight: .w400,
-        letterSpacing: 0.px,
-      ),
-      css('.hero-venue').styles(
-        order: 4,
-        fontSize: 0.95.rem,
-        margin: .only(top: 0.5.rem),
-      ),
-      css('.hero-florist').styles(display: .none),
-      css('.hero-scroll').styles(
-        order: 5,
-        display: .flex,
-        position: Position.absolute(bottom: 2.25.rem, left: 0.px, right: 0.px),
-      ),
+      css('.hero-names').styles(fontSize: 3.6.rem, lineHeight: 1.08.em),
+      css('.hero-amp').styles(margin: .symmetric(horizontal: 0.6.rem)),
+      css('.hero-date').styles(fontSize: 1.35.rem),
+      css('.countdown-cell').styles(padding: .symmetric(horizontal: 1.1.rem)),
+      css('.countdown-value').styles(fontSize: 2.05.rem, minWidth: 2.4.rem),
+      css('.hero-scroll').styles(margin: .only(top: 2.25.rem)),
+    ]),
+    css.media(MediaQuery.screen(maxWidth: 420.px), [
+      css('.hero-names').styles(fontSize: 3.rem),
+      css('.countdown-cell').styles(padding: .symmetric(horizontal: 0.75.rem)),
+      css('.countdown-value').styles(fontSize: 1.7.rem, minWidth: 2.rem),
     ]),
   ];
 }

@@ -3,31 +3,46 @@ import 'package:jaspr/jaspr.dart';
 
 import '../../constants/theme.dart';
 import '../../constants/wedding_data.dart';
+import 'section_heading.dart';
 
-/// The "Ceremony & Reception" details section, shown as two cards.
+/// "Where" — the ceremony & reception cards, each with a Get Directions link.
 class DetailsSection extends StatelessComponent {
   const DetailsSection({super.key});
 
   @override
   Component build(BuildContext context) {
-    return div(classes: 'details', [
-      p(classes: 'section-kicker', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [.text('Event Details')]),
-      h2(classes: 'section-title', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [.text('When & Where')]),
+    return div(id: 'details', classes: 'details', [
+      const SectionHeading(kicker: detailsKicker, title: detailsTitle),
       div(classes: 'details-cards', [
-        _detailsCard(
-            icon: '💐', title: 'Ceremony', time: ceremonyTime, venue: ceremonyVenue, address: ceremonyAddress, delay: '3'),
-        _detailsCard(
-            icon: '🥂', title: 'Reception', time: receptionTime, venue: receptionVenue, address: receptionAddress, delay: '4'),
+        _card(
+          icon: '💍',
+          title: 'Ceremony',
+          time: ceremonyTime,
+          venue: ceremonyVenue,
+          address: ceremonyAddress,
+          mapUrl: ceremonyMapUrl,
+          delay: '3',
+        ),
+        _card(
+          icon: '🥂',
+          title: 'Reception',
+          time: receptionTime,
+          venue: receptionVenue,
+          address: receptionAddress,
+          mapUrl: receptionMapUrl,
+          delay: '4',
+        ),
       ]),
     ]);
   }
 
-  Component _detailsCard({
+  Component _card({
     required String icon,
     required String title,
     required String time,
     required String venue,
     required String address,
+    required String mapUrl,
     required String delay,
   }) {
     return div(classes: 'details-card', attributes: {'data-scroll': '', 'data-scroll-delay': delay}, [
@@ -36,6 +51,10 @@ class DetailsSection extends StatelessComponent {
       p(classes: 'details-time', [.text(time)]),
       p(classes: 'details-venue', [.text(venue)]),
       p(classes: 'details-address', [.text(address)]),
+      a(href: mapUrl, target: Target.blank, classes: 'details-map', [
+        .text('Get Directions'),
+        span(classes: 'details-map-arrow', [.text('→')]),
+      ]),
     ]);
   }
 
@@ -46,16 +65,18 @@ class DetailsSection extends StatelessComponent {
         display: .flex,
         flexDirection: .column,
         alignItems: .center,
-        padding: .symmetric(vertical: 7.5.rem, horizontal: 1.5.rem),
-        backgroundColor: secondaryContainer,
+        width: 100.percent,
+        padding: .symmetric(vertical: 7.rem, horizontal: 1.5.rem),
+        backgroundColor: surfaceContainer,
       ),
       css('.details-cards').styles(
         display: .flex,
-        flexWrap: .wrap,
         justifyContent: .center,
-        gap: Gap.all(1.5.rem),
+        gap: Gap.all(1.75.rem),
+        width: 100.percent,
+        maxWidth: 56.rem,
         margin: .only(top: 3.5.rem),
-        maxWidth: 900.px,
+        raw: const {'flex-wrap': 'wrap'},
       ),
     ]),
     css('.details-card', [
@@ -63,27 +84,68 @@ class DetailsSection extends StatelessComponent {
         display: .flex,
         flexDirection: .column,
         alignItems: .center,
-        width: 320.px,
-        padding: .all(2.5.rem),
-        radius: .all(.circular(8.px)),
-        backgroundColor: const Color('#fffdfb'),
-        border: Border.all(color: primaryContainer, width: 1.px),
+        width: 20.rem,
+        padding: .symmetric(vertical: 2.75.rem, horizontal: 2.25.rem),
+        radius: .all(.circular(3.px)),
+        backgroundColor: const Color('#ffffff'),
+        border: Border.all(color: outlineVariant, width: 1.px),
         shadow: ambientShadow,
         textAlign: .center,
       ),
-      css('.details-icon').styles(margin: .only(bottom: 0.9.rem), fontSize: 2.2.rem, opacity: 0.8),
-      css('h3').styles(margin: .only(bottom: 0.75.rem), fontFamily: headingFont, fontSize: 1.6.rem, color: onSurface),
+      css('.details-icon').styles(margin: .only(bottom: 1.rem), fontSize: 1.5.rem, lineHeight: 1.em, opacity: 0.9),
+      css('h3').styles(
+        margin: .only(bottom: 1.25.rem),
+        fontFamily: bodyFont,
+        fontSize: 0.7.rem,
+        fontWeight: .w500,
+        letterSpacing: 4.px,
+        textTransform: .upperCase,
+        color: primaryColor,
+      ),
       css('.details-time').styles(
         margin: .only(bottom: 0.75.rem),
         fontFamily: headingFont,
-        fontSize: 1.4.rem,
-        color: secondaryColor,
+        fontSize: 1.9.rem,
+        color: onSurface,
       ),
-      css('.details-venue').styles(margin: .only(bottom: 0.25.rem), fontFamily: bodyFont, fontWeight: .w700, fontSize: 1.rem, color: onSurface),
-      css('.details-address').styles(margin: .zero, fontFamily: bodyFont, fontSize: 0.9.rem, color: onSurfaceVariant),
+      css('.details-venue').styles(
+        margin: .only(bottom: 0.35.rem),
+        fontFamily: headingFont,
+        fontSize: 1.3.rem,
+        color: onSurface,
+      ),
+      css('.details-address').styles(
+        margin: .zero,
+        fontFamily: bodyFont,
+        fontSize: 0.88.rem,
+        lineHeight: 1.6.em,
+        color: onSurfaceVariant,
+      ),
+      css('.details-map', [
+        css('&').styles(
+          display: .flex,
+          alignItems: .center,
+          gap: Gap.column(0.5.rem),
+          margin: .only(top: 1.75.rem),
+          padding: .symmetric(vertical: 0.65.rem, horizontal: 1.5.rem),
+          radius: .all(.circular(999.px)),
+          border: Border.all(color: primaryColor, width: 1.px),
+          fontFamily: bodyFont,
+          fontSize: 0.66.rem,
+          fontWeight: .w500,
+          letterSpacing: 2.px,
+          textTransform: .upperCase,
+          color: primaryColor,
+          textDecoration: TextDecoration(line: .none),
+          transition: const Transition('background-color, color', duration: Duration(milliseconds: 200)),
+        ),
+        css('&:hover').styles(backgroundColor: primaryColor, color: onPrimary),
+        css('.details-map-arrow').styles(fontSize: 0.9.rem, lineHeight: 1.em),
+      ]),
     ]),
     css.media(MediaQuery.screen(maxWidth: 600.px), [
       css('.details').styles(padding: .symmetric(vertical: 4.5.rem, horizontal: 1.5.rem)),
+      css('.details-card').styles(width: 100.percent, padding: .symmetric(vertical: 2.25.rem, horizontal: 1.5.rem)),
     ]),
   ];
 }
