@@ -99,7 +99,7 @@ class AttireSection extends StatelessComponent {
         width: 3.25.rem,
         height: 3.25.rem,
         radius: .all(.circular(999.px)),
-        border: Border.all(color: Color('rgba(51, 46, 42, 0.12)'), width: 1.px),
+        border: Border.all(color: Color('rgba(93, 84, 76, 0.12)'), width: 1.px),
         shadow: softShadow,
       ),
       css('.attire-swatch-name').styles(
@@ -132,7 +132,7 @@ class AttireSection extends StatelessComponent {
           padding: .symmetric(vertical: 2.25.rem, horizontal: 2.rem),
           radius: .all(.circular(3.px)),
           backgroundColor: const Color('rgba(255, 255, 255, 0.72)'),
-          border: Border.all(color: Color('rgba(51, 46, 42, 0.08)'), width: 1.px),
+          border: Border.all(color: Color('rgba(93, 84, 76, 0.08)'), width: 1.px),
           textAlign: .center,
         ),
         css('h3').styles(

@@ -23,19 +23,22 @@ class HeroSection extends StatelessComponent {
       div(classes: 'hero-bg', []),
       div(classes: 'hero-overlay', []),
       div(classes: 'hero-content', [
-        p(classes: 'hero-eyebrow', attributes: {'data-scroll': '', 'data-scroll-delay': '1'}, [
+        // The hero uses the origin's staged `hero-rise` / `hero-stage-rise`
+        // entrance (see the keyframes below) instead of the scroll reveal,
+        // because it is the first thing under the cover.
+        p(classes: 'hero-eyebrow', [
           .text(heroInvitationLabel),
         ]),
-        h1(classes: 'hero-names', attributes: {'data-scroll': '', 'data-scroll-delay': '2'}, [
+        h1(classes: 'hero-names', [
           span([.text(brideName)]),
           span(classes: 'hero-amp', [.text('&')]),
           span([.text(groomName)]),
         ]),
-        div(classes: 'hero-meta', attributes: {'data-scroll': '', 'data-scroll-delay': '3'}, [
+        div(classes: 'hero-meta', [
           p(classes: 'hero-date', [.text('$weddingWeekday, $weddingDateFull')]),
           p(classes: 'hero-place', [.text('$heroChurchName · $heroVenueName')]),
         ]),
-        div(classes: 'countdown', attributes: {'data-scroll': 'scale', 'data-scroll-delay': '4'}, [
+        div(classes: 'countdown', [
           for (var i = 0; i < countdownLabels.length; i++)
             div(classes: 'countdown-cell', [
               span(id: _ids[i], classes: 'countdown-value', [.text(_initial[i])]),
@@ -70,13 +73,28 @@ class HeroSection extends StatelessComponent {
         backgroundSize: .cover,
         backgroundPosition: BackgroundPosition.center,
         opacity: 0.62,
+        // Origin `.animate-kenburns-a`: `9s ease-out both`.
+        animation: const Animation(
+          name: 'heroKenBurns',
+          duration: Duration(seconds: 9),
+          curve: Curve.easeOut,
+          fillMode: AnimationFillMode.both,
+        ),
       ),
       css('.hero-overlay').styles(
         position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
         raw: const {
           'background':
-              'linear-gradient(to bottom, rgba(24, 20, 17, 0.62) 0%, rgba(24, 20, 17, 0.34) 45%, rgba(24, 20, 17, 0.78) 100%)',
+              'linear-gradient(to bottom, rgba(93, 84, 76, 0.66) 0%, rgba(93, 84, 76, 0.38) 45%, rgba(93, 84, 76, 0.84) 100%)',
         },
+        // Origin `.hero-glow-pulse`: 18s ease-in-out infinite alternate.
+        animation: const Animation(
+          name: 'heroGlowPulse',
+          duration: Duration(seconds: 18),
+          curve: Curve.easeInOut,
+          direction: AnimationDirection.alternate,
+          count: 100,
+        ),
       ),
     ]),
 
@@ -101,6 +119,13 @@ class HeroSection extends StatelessComponent {
         letterSpacing: 6.px,
         textTransform: .upperCase,
         color: primaryFixedDim,
+        // Origin `.hero-rise`: .7s cubic-bezier(.22,1,.36,1) forwards.
+        animation: const Animation(
+          name: 'heroRise',
+          duration: Duration(milliseconds: 700),
+          curve: Curve.cubicBezier(0.22, 1, 0.36, 1),
+          fillMode: AnimationFillMode.both,
+        ),
       ),
       css('.hero-names').styles(
         margin: .only(top: 1.5.rem),
@@ -110,6 +135,13 @@ class HeroSection extends StatelessComponent {
         lineHeight: 1.02.em,
         letterSpacing: 1.px,
         color: inverseOnSurface,
+        animation: const Animation(
+          name: 'heroRise',
+          duration: Duration(milliseconds: 700),
+          curve: Curve.cubicBezier(0.22, 1, 0.36, 1),
+          delay: Duration(milliseconds: 120),
+          fillMode: AnimationFillMode.both,
+        ),
       ),
       css('.hero-amp').styles(
         margin: .symmetric(horizontal: 1.rem),
@@ -124,6 +156,14 @@ class HeroSection extends StatelessComponent {
         flexDirection: .column,
         alignItems: .center,
         gap: Gap.column(0.5.rem),
+        // Origin `.hero-stage-rise`: .9s cubic-bezier(.22,1,.36,1) .48s.
+        animation: const Animation(
+          name: 'heroStageRise',
+          duration: Duration(milliseconds: 900),
+          curve: Curve.cubicBezier(0.22, 1, 0.36, 1),
+          delay: Duration(milliseconds: 480),
+          fillMode: AnimationFillMode.both,
+        ),
       ),
       css('.hero-date').styles(
         margin: .zero,
@@ -139,7 +179,7 @@ class HeroSection extends StatelessComponent {
         fontWeight: .w400,
         letterSpacing: 4.px,
         textTransform: .upperCase,
-        color: const Color('rgba(246, 239, 230, 0.8)'),
+        color: const Color('rgba(252, 250, 248, 0.8)'),
       ),
       css('.countdown').styles(
         margin: .only(top: 2.75.rem),
@@ -147,6 +187,13 @@ class HeroSection extends StatelessComponent {
         alignItems: .center,
         justifyContent: .center,
         raw: const {'flex-wrap': 'wrap'},
+        animation: const Animation(
+          name: 'heroStageRise',
+          duration: Duration(milliseconds: 900),
+          curve: Curve.cubicBezier(0.22, 1, 0.36, 1),
+          delay: Duration(milliseconds: 600),
+          fillMode: AnimationFillMode.both,
+        ),
       ),
       css('.countdown-cell', [
         css('&').styles(
@@ -157,7 +204,7 @@ class HeroSection extends StatelessComponent {
           padding: .symmetric(horizontal: 1.75.rem),
         ),
         css('& + .countdown-cell').styles(
-          border: .only(left: BorderSide.solid(color: Color('rgba(246, 239, 230, 0.28)'), width: 1.px)),
+          border: .only(left: BorderSide.solid(color: Color('rgba(252, 250, 248, 0.28)'), width: 1.px)),
         ),
       ]),
       css('.countdown-value').styles(
@@ -177,7 +224,7 @@ class HeroSection extends StatelessComponent {
         fontWeight: .w500,
         letterSpacing: 3.px,
         textTransform: .upperCase,
-        color: const Color('rgba(246, 239, 230, 0.68)'),
+        color: const Color('rgba(252, 250, 248, 0.68)'),
       ),
       css('.hero-scroll').styles(
         margin: .only(top: 3.25.rem),
@@ -190,23 +237,52 @@ class HeroSection extends StatelessComponent {
         fontWeight: .w500,
         letterSpacing: 3.px,
         textTransform: .upperCase,
-        color: const Color('rgba(246, 239, 230, 0.6)'),
+        color: const Color('rgba(252, 250, 248, 0.62)'),
+        animation: const Animation(
+          name: 'heroStageRise',
+          duration: Duration(milliseconds: 900),
+          curve: Curve.cubicBezier(0.22, 1, 0.36, 1),
+          delay: Duration(milliseconds: 720),
+          fillMode: AnimationFillMode.both,
+        ),
       ),
+      // Origin `.hero-bob-slow`: 9s ease-in-out 1.6s infinite alternate.
       css('.hero-scroll-icon').styles(
         fontSize: 1.1.rem,
         animation: const Animation(
-          name: 'heroBounce',
-          duration: Duration(seconds: 2),
-          count: 100,
+          name: 'heroBob',
+          duration: Duration(seconds: 9),
           curve: Curve.easeInOut,
+          delay: Duration(milliseconds: 1600),
+          direction: AnimationDirection.alternate,
+          count: 100,
         ),
       ),
     ]),
 
-    // Gentle bob for the scroll cue.
-    css.keyframes('heroBounce', {
-      '0%, 100%': Styles(transform: Transform.translate(y: 0.px)),
-      '50%': Styles(transform: Transform.translate(y: 6.px)),
+    // ---------------------------------------------------------------------
+    // Hero keyframes — bodies mirror the origin stylesheet
+    // (`ceremo-hero-*`, `kenburns-a`). See the RE report §6.
+    // ---------------------------------------------------------------------
+    css.keyframes('heroRise', {
+      '0%': Styles(opacity: 0, raw: const {'transform': 'translateY(14px)'}),
+      '100%': Styles(opacity: 1, raw: const {'transform': 'translate(0, 0)'}),
+    }),
+    css.keyframes('heroStageRise', {
+      '0%': Styles(opacity: 0, raw: const {'transform': 'translateY(28px)'}),
+      '100%': Styles(opacity: 1, raw: const {'transform': 'translate(0, 0)'}),
+    }),
+    css.keyframes('heroBob', {
+      '0%': Styles(raw: const {'transform': 'translate(0, 0)'}),
+      '100%': Styles(raw: const {'transform': 'translateY(-6px)'}),
+    }),
+    css.keyframes('heroGlowPulse', {
+      '0%': Styles(opacity: 0.85, raw: const {'transform': 'scale(1)'}),
+      '100%': Styles(opacity: 1, raw: const {'transform': 'scale(1.06)'}),
+    }),
+    css.keyframes('heroKenBurns', {
+      '0%': Styles(raw: const {'transform': 'scale(1.02) translate(0)'}),
+      '100%': Styles(raw: const {'transform': 'scale(1.09) translate(-1.4%, -1%)'}),
     }),
 
     css.media(MediaQuery.screen(maxWidth: 900.px), [

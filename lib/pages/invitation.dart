@@ -300,7 +300,7 @@ class Invitation extends StatelessComponent {
       ),
     ),
     css.keyframes('revealUp', {
-      'from': Styles(opacity: 0, transform: Transform.translate(y: 32.px)),
+      'from': Styles(opacity: 0, transform: Transform.translate(y: 30.px)),
       'to': Styles(opacity: 1, transform: Transform.none),
     }),
     css('[data-scroll="left"].in-view').styles(

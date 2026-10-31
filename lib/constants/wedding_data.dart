@@ -189,12 +189,17 @@ const dressCode = 'Formal';
 const dressCodeNote = 'The lawn is soft underfoot, so block heels beat stilettos.';
 
 /// Palette swatches: `(name, hex)`.
+///
+/// These five values are the ones the live Ceremo *Romantic* sample ships in its
+/// `guestEssentials.colorPalette` content (`Paper #F7F1EA`, `Champagne #E7D9C6`,
+/// `Antique gold #C9A227`, `Sage #7C8A6B`, `Charcoal #4A3F35`) — i.e. the
+/// dress-code range is richer than the monochrome page theme.
 const attirePalette = <({String name, String hex})>[
-  (name: 'Paper', hex: '#fbf8f3'),
-  (name: 'Champagne', hex: '#e8d9be'),
-  (name: 'Antique gold', hex: '#c9ae7e'),
-  (name: 'Sage', hex: '#7c8a72'),
-  (name: 'Charcoal', hex: '#332e2a'),
+  (name: 'Paper', hex: '#f7f1ea'),
+  (name: 'Champagne', hex: '#e7d9c6'),
+  (name: 'Antique gold', hex: '#c9a227'),
+  (name: 'Sage', hex: '#7c8a6b'),
+  (name: 'Charcoal', hex: '#4a3f35'),
 ];
 const attirePaletteNote = 'Anywhere in this range is perfect.';
 

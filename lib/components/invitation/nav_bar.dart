@@ -53,9 +53,9 @@ class NavBar extends StatelessComponent {
         gap: Gap.column(1.5.rem),
         height: 4.5.rem,
         padding: .symmetric(horizontal: 1.75.rem),
-        backgroundColor: const Color('rgba(251, 248, 243, 0.82)'),
+        backgroundColor: const Color('rgba(252, 250, 248, 0.82)'),
         backdropFilter: Filter.blur(14.px),
-        border: .only(bottom: BorderSide.solid(color: Color('rgba(222, 213, 199, 0.55)'), width: 1.px)),
+        border: .only(bottom: BorderSide.solid(color: Color('rgba(221, 217, 213, 0.55)'), width: 1.px)),
       ),
       css('.nav-brand').styles(
         display: .flex,

@@ -88,7 +88,7 @@ class FooterSection extends StatelessComponent {
           fontWeight: .w500,
           letterSpacing: 2.px,
           textTransform: .upperCase,
-          color: const Color('rgba(246, 239, 230, 0.7)'),
+          color: const Color('rgba(252, 250, 248, 0.7)'),
           textDecoration: TextDecoration(line: .none),
           transition: const Transition('color', duration: Duration(milliseconds: 200)),
         ),
@@ -100,7 +100,7 @@ class FooterSection extends StatelessComponent {
         fontSize: 0.66.rem,
         fontWeight: .w400,
         letterSpacing: 1.px,
-        color: const Color('rgba(246, 239, 230, 0.45)'),
+        color: const Color('rgba(252, 250, 248, 0.45)'),
       ),
     ]),
     css.media(MediaQuery.screen(maxWidth: 600.px), [

@@ -82,7 +82,7 @@ class PrenupSection extends StatelessComponent {
         position: .absolute(top: 0.px, left: 0.px, right: 0.px, bottom: 0.px),
         raw: const {
           'background':
-              'linear-gradient(to top, rgba(24, 20, 17, 0.65) 0%, rgba(24, 20, 17, 0.12) 60%)',
+              'linear-gradient(to top, rgba(58, 52, 47, 0.65) 0%, rgba(58, 52, 47, 0.12) 60%)',
         },
       ),
       css('.prenup-play', [
@@ -103,8 +103,8 @@ class PrenupSection extends StatelessComponent {
           width: 4.5.rem,
           height: 4.5.rem,
           radius: .all(.circular(999.px)),
-          border: Border.all(color: Color('rgba(246, 239, 230, 0.7)'), width: 1.px),
-          backgroundColor: Color('rgba(24, 20, 17, 0.35)'),
+          border: Border.all(color: Color('rgba(252, 250, 248, 0.7)'), width: 1.px),
+          backgroundColor: Color('rgba(58, 52, 47, 0.35)'),
           backdropFilter: Filter.blur(4.px),
           fontSize: 1.05.rem,
           color: inverseOnSurface,
@@ -116,7 +116,7 @@ class PrenupSection extends StatelessComponent {
           fontWeight: .w500,
           letterSpacing: 3.px,
           textTransform: .upperCase,
-          color: const Color('rgba(246, 239, 230, 0.85)'),
+          color: const Color('rgba(252, 250, 248, 0.85)'),
         ),
         css('&:hover .prenup-play-icon').styles(
           transform: Transform.scale(1.08),
@@ -131,7 +131,7 @@ class PrenupSection extends StatelessComponent {
         fontSize: 0.95.rem,
         fontWeight: .w400,
         lineHeight: 1.7.em,
-        color: const Color('rgba(246, 239, 230, 0.72)'),
+        color: const Color('rgba(252, 250, 248, 0.72)'),
       ),
     ]),
     css.media(MediaQuery.screen(maxWidth: 600.px), [

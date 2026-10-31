@@ -61,7 +61,7 @@ class RemindersSection extends StatelessComponent {
         padding: .symmetric(vertical: 2.25.rem, horizontal: 2.rem),
         radius: .all(.circular(3.px)),
         border: Border.all(color: Color('rgba(201, 174, 126, 0.25)'), width: 1.px),
-        backgroundColor: Color('rgba(246, 239, 230, 0.04)'),
+        backgroundColor: Color('rgba(252, 250, 248, 0.04)'),
       ),
       css('.reminder-index').styles(
         fontFamily: bodyFont,
@@ -83,7 +83,7 @@ class RemindersSection extends StatelessComponent {
         fontSize: 0.9.rem,
         fontWeight: .w400,
         lineHeight: 1.7.em,
-        color: const Color('rgba(246, 239, 230, 0.7)'),
+        color: const Color('rgba(252, 250, 248, 0.7)'),
       ),
     ]),
     css.media(MediaQuery.screen(maxWidth: 860.px), [
